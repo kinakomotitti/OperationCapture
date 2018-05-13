@@ -1,0 +1,42 @@
+﻿<Page x:Class="OperationCapture.DefaultMode"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:OperationCapture"
+      mc:Ignorable="d" 
+      d:DesignHeight="100" d:DesignWidth="200"
+      Title="DefaultMode" Background="White" Loaded="Page_Loaded">
+    <Page.Resources>
+        <ResourceDictionary>
+            <BitmapImage x:Key="StartImage" 
+                         UriSource="./Resource/再生ボタン.png"/>
+            <BitmapImage x:Key="SaveImage"
+                         UriSource="./Resource/フロッピーディスクアイコン3.png"/>
+            <BitmapImage x:Key="CaptureImage"
+                         UriSource="./Resource/レトロなカメラのフリーイラスト1.png"/>
+            <BitmapImage x:Key="ExitImage"
+                         UriSource="./Resource/EXITのベクター素材1.png"/>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="CaptureStartButton" Grid.Column="0" Click="CaptureStartButton_Click">
+            <Image Source="{StaticResource StartImage}"/>
+        </Button>
+        <Button x:Name="SaveToExcelButton" Grid.Column="1" Click="SaveToExcelButton_Click" >
+            <Image Source="{StaticResource SaveImage}"/>
+        </Button>
+        <Button x:Name="PrintScreenButton" Grid.Column="2" Click="PrintScreenButton_Click">
+            <Image Source="{StaticResource CaptureImage}"/>
+        </Button>
+        <Button x:Name="ExitApplicationButton" Grid.Column="3" Click="ExitApplicationButton_Click">
+            <Image Source="{StaticResource ExitImage}"/>
+        </Button>
+    </Grid>
+</Page>
