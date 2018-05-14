@@ -28,6 +28,5 @@ namespace OperationCapture
             this.Navigate(nextPage);
         }
         #endregion
-
     }
 }

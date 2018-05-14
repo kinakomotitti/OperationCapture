@@ -25,14 +25,11 @@ namespace OperationCapture
         {
             InitializeComponent();
         }
+
         private void CaptureStartButton_Click(object sender, RoutedEventArgs e)
         {
             GrobalHookManager.FinalizeHooks();
             this.NavigationService.GoBack();
         }
-        #region Event
-
-        #endregion
-
     }
 }
