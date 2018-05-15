@@ -23,7 +23,6 @@ namespace OperationCapture.Core
 
         private int ActiveCellRow = 1;
         private long CellRow = 24;
-        private static int SheetId = 1;
         public static Dictionary<string, string> Operations = new Dictionary<string, string>();
 
         #endregion
@@ -37,19 +36,34 @@ namespace OperationCapture.Core
         /// </summary>
         public void SaveEvidenceToExcelFile()
         {
-            using (var wb = new XLWorkbook())
+            //ダサい名前ｗ
+            string fileName = "エビデンサー.xlsx";
+            if (!File.Exists(fileName))
+            {
+                using (var wb = new XLWorkbook())
+                {
+                    //ゆくゆくは表紙として扱ってあげたい。
+                    //今はダミーデータとしておこう( ﾟДﾟ)
+                    wb.AddWorksheet("sheet1");
+                    wb.SaveAs(fileName);
+                }
+            }
+            using (var wb = new XLWorkbook(fileName))
             {
                 var ws = wb.AddWorksheet(DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-                ws.Cell($"A{ActiveCellRow.ToString()}").Value = "操作開始！";
+                ws.Cell($"A{ActiveCellRow.ToString()}").Value = "操作開始";
                 ActiveCellRow++;
                 foreach (var item in Operations)
                 {
-                    var image = ws.AddPicture(item.Key).MoveTo(ws.Cell($"B{ActiveCellRow}").Address);
-                    ActiveCellRow += (int)(image.Height / CellRow)+1;
-                    ws.Cell($"A{ActiveCellRow.ToString()}").Value = $"↑の画像は、{item.Value} した結果です。";
+                    var image = ws.AddPicture(item.Key)
+                                  .MoveTo(ws.Cell($"B{ActiveCellRow}")
+                                            .Address)
+                                  .Scale(0.7);
+                    ActiveCellRow += (int)(image.Height / CellRow) + 1;
+                    ws.Cell($"A{ActiveCellRow.ToString()}").Value = $"上記画像は、{item.Value} した結果です。";
                     ActiveCellRow++;
                 }
-                wb.SaveAs("Created.xlsx");
+                wb.Save();
             }
         }
 

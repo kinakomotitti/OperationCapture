@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OperationCapture.Core
 {
-    public  class GrobalHookManager
+    public class GrobalHookManager
     {
         /// <summary>
         /// Class declarations
@@ -97,12 +97,19 @@ namespace OperationCapture.Core
 
         async static void KeyboardHook_KeyDown(GrobalHooks.KeyboardHook.VKeys key)
         {
-            await CallCoreMethod(key.ToString());
+
             if (key == GrobalHooks.KeyboardHook.VKeys.ESCAPE)
             {
                 System.Environment.Exit(0);
                 //this.ClosingProcess();
             }
+            //鬱陶しいからEnter以外は無視しようと思います。
+            else if (key != GrobalHooks.KeyboardHook.VKeys.RETURN)
+            {
+                //No Action
+                return;
+            }
+            await CallCoreMethod(key.ToString());
         }
 
         #endregion
@@ -119,7 +126,7 @@ namespace OperationCapture.Core
         #endregion
 
         #endregion
-     
+
 
     }
 }
