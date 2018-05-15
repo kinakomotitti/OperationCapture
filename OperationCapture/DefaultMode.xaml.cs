@@ -38,6 +38,7 @@ namespace OperationCapture
 
         private void SaveToExcelButton_Click(object sender, RoutedEventArgs e)
         {
+            this.SaveToExcelButton.IsEnabled = false;
             EventCore core = new EventCore();
             core.SaveEvidenceToExcelFile();
         }

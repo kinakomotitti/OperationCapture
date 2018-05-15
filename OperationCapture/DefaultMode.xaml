@@ -26,16 +26,20 @@
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="CaptureStartButton" Grid.Column="0" Click="CaptureStartButton_Click">
+        <Button x:Name="CaptureStartButton" Grid.Column="0" 
+                Click="CaptureStartButton_Click" ToolTip="Start Capture">
             <Image Source="{StaticResource StartImage}"/>
         </Button>
-        <Button x:Name="SaveToExcelButton" Grid.Column="1" Click="SaveToExcelButton_Click" >
+        <Button x:Name="SaveToExcelButton" Grid.Column="1" 
+                Click="SaveToExcelButton_Click"  ToolTip="Save to Excel">
             <Image Source="{StaticResource SaveImage}"/>
         </Button>
-        <Button x:Name="PrintScreenButton" Grid.Column="2" Click="PrintScreenButton_Click">
+        <Button x:Name="PrintScreenButton" Grid.Column="2" 
+                Click="PrintScreenButton_Click"  ToolTip="Take a Screenshot">
             <Image Source="{StaticResource CaptureImage}"/>
         </Button>
-        <Button x:Name="ExitApplicationButton" Grid.Column="3" Click="ExitApplicationButton_Click">
+        <Button x:Name="ExitApplicationButton" Grid.Column="3" 
+                Click="ExitApplicationButton_Click"  ToolTip="Exit">
             <Image Source="{StaticResource ExitImage}"/>
         </Button>
     </Grid>

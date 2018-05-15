@@ -12,32 +12,18 @@ namespace Sample
     {
         static void Main(string[] args)
         {
-            var cellHeight = 18;
+            var cellHeight = 24;
             var row = 1;
             using (var wb = new XLWorkbook())
             {
-                //ワークシートの設定
                 var ws = wb.AddWorksheet("Sheet1");
-
-                //貼り付ける画像を指定
                 var imagePath = @"./Resource/image.jpg";
-
-                //タイトルとしてA１セルに文字を出力
-                ws.Cell($"A{row}").Value = "これ食べたい";
-                row++;
-
-                //ワークシートの変数のAddPictureメソッドを呼び出す
-                //左端がB２のセルになるように画像を移動する
-                var image = ws.AddPicture(imagePath).MoveTo(ws.Cell($"B{row}").Address);
-
-                //画像の左端のセル番号を計算してみる・・・
-                row += (int)(image.Height / cellHeight);
-
-                //締めの一言を画像にかぶらないように出力する
-                ws.Cell($"A{row}").Value = "以上です。";
-
+                var image = ws.AddPicture(imagePath).MoveTo(ws.Cell($"A{row}").Address);
+                row += (int)(image.Height / cellHeight)+2;
+                ws.Cell($"A{row}").Value = row.ToString();
                 wb.SaveAs("file.xlsx");
             }
         }
+
     }
 }
