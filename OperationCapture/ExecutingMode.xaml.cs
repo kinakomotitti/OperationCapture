@@ -21,14 +21,21 @@ namespace OperationCapture
     /// </summary>
     public partial class ExecutingMode : Page
     {
+        private double defaultWindowWidth = 400;
+        private double defaultWindowHeight=110;
         public ExecutingMode()
         {
             InitializeComponent();
+            this.WindowWidth = 50;
+            this.WindowHeight = 50;
+            this.Opacity = 0.5;
         }
 
         private void CaptureStartButton_Click(object sender, RoutedEventArgs e)
         {
             GrobalHookManager.FinalizeHooks();
+            this.WindowWidth=defaultWindowWidth;
+            this.WindowHeight=defaultWindowHeight;
             this.NavigationService.GoBack();
         }
     }

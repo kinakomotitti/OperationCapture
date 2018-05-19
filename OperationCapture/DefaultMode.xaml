@@ -27,19 +27,23 @@
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
         <Button x:Name="CaptureStartButton" Grid.Column="0" 
-                Click="CaptureStartButton_Click" ToolTip="Start Capture">
+                Click="CaptureStartButton_Click" ToolTip="Start Capture"
+                 BorderBrush="White" Background="white">
             <Image Source="{StaticResource StartImage}"/>
         </Button>
         <Button x:Name="SaveToExcelButton" Grid.Column="1" 
-                Click="SaveToExcelButton_Click"  ToolTip="Save to Excel">
+                Click="SaveToExcelButton_Click"  ToolTip="Save to Excel"
+                 BorderBrush="White" Background="white">
             <Image Source="{StaticResource SaveImage}"/>
         </Button>
         <Button x:Name="PrintScreenButton" Grid.Column="2" 
-                Click="PrintScreenButton_Click"  ToolTip="Take a Screenshot">
+                Click="PrintScreenButton_Click"  ToolTip="Take a Screenshot"
+                 BorderBrush="White" Background="white">
             <Image Source="{StaticResource CaptureImage}"/>
         </Button>
         <Button x:Name="ExitApplicationButton" Grid.Column="3" 
-                Click="ExitApplicationButton_Click"  ToolTip="Exit">
+                Click="ExitApplicationButton_Click"  ToolTip="Exit"
+                 BorderBrush="White" Background="white">
             <Image Source="{StaticResource ExitImage}"/>
         </Button>
     </Grid>

@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OperationCapture"
         mc:Ignorable="d"
-        ShowsNavigationUI="False"
-        Title="MainWindow" Height="110" Width="400"
-        Topmost="True" WindowStyle="None" Background="White">
+                  ShowsNavigationUI="False"
+                  Title="MainWindow" 
+                  Height="110" Width="400"
+                  Topmost="True" 
+                  WindowStyle="None"
+                  ResizeMode="NoResize" 
+                  Foreground="White"
+                  BorderBrush="AliceBlue">
 
 </NavigationWindow>
