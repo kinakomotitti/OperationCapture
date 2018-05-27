@@ -47,10 +47,13 @@ namespace OperationCapture.Core
 
         #region CallCoreMethod
 
-        private static async Task CallCoreMethod(string operation)
+        private static void CallCoreMethod(string operation)
         {
-            EventCore core = new EventCore();
-            core.TakeScreenShot(operation);
+            Task.Run(() =>
+            {
+                EventCore core = new EventCore();
+                core.TakeScreenShot(operation);
+            });
         }
 
         #endregion
@@ -59,43 +62,43 @@ namespace OperationCapture.Core
 
         #region MouseHook_MouseWheel
 
-        async static void MouseHook_MouseWheel(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
+        static void MouseHook_MouseWheel(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
-            await CallCoreMethod("Mouse Wheel Move");
+            CallCoreMethod("Mouse Wheel Move");
         }
 
         #endregion
 
         #region MouseHook_MiddleButtonDown
 
-        async static void MouseHook_MiddleButtonDown(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
+        static void MouseHook_MiddleButtonDown(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
-            await CallCoreMethod("Mouse Middle Button Down");
+            CallCoreMethod("Mouse Middle Button Down");
         }
 
         #endregion
 
         #region MouseHook_RightButtonDown
 
-        async static void MouseHook_RightButtonDown(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
+        static void MouseHook_RightButtonDown(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
-            await CallCoreMethod("Mouse Right Button Down");
+            CallCoreMethod("Mouse Right Button Down");
         }
 
         #endregion
 
         #region MouseHook_LeftButtonDown
 
-        async static void MouseHook_LeftButtonDown(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
+        static void MouseHook_LeftButtonDown(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
-            await CallCoreMethod("Mouse Left Button Down");
+            CallCoreMethod("Mouse Left Button Down");
         }
 
         #endregion
 
         #region KeyboardHook_KeyDown
 
-        async static void KeyboardHook_KeyDown(GlobalHooks.KeyboardHook.VKeys key)
+        static void KeyboardHook_KeyDown(GlobalHooks.KeyboardHook.VKeys key)
         {
 
             if (key == GlobalHooks.KeyboardHook.VKeys.ESCAPE)
@@ -109,7 +112,7 @@ namespace OperationCapture.Core
                 //No Action
                 return;
             }
-            await CallCoreMethod(key.ToString());
+            CallCoreMethod(key.ToString());
         }
 
         #endregion

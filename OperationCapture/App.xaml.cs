@@ -1,14 +1,10 @@
-﻿using OperationCapture.Core;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-
-namespace OperationCapture
+﻿namespace OperationCapture
 {
+    #region using
+    using OperationCapture.Core;
+    using System.Windows;
+    #endregion
+
     /// <summary>
     /// App.xaml の相互作用ロジック
     /// </summary>
