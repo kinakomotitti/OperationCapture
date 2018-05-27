@@ -30,7 +30,7 @@ namespace OperationCapture
 
         private void CaptureStartButton_Click(object sender, RoutedEventArgs e)
         {
-            GrobalHookManager.InitializeHooks();
+            GlobalHookManager.InitializeHooks();
             ExecutingMode nextPage = new ExecutingMode();
             this.SaveToExcelButton.IsEnabled  = false;
             this.NavigationService.Navigate(nextPage);

@@ -28,7 +28,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
-namespace OperationCapture.GrobalHooks
+namespace OperationCapture.GlobalHooks
 {   
     /// <summary>
     /// Class for intercepting low level Windows mouse hooks.

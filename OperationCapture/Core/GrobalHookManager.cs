@@ -6,30 +6,30 @@ using System.Threading.Tasks;
 
 namespace OperationCapture.Core
 {
-    public class GrobalHookManager
+    public class GlobalHookManager
     {
         /// <summary>
         /// Class declarations
         /// </summary>
-        static GrobalHooks.MouseHook mouseHook = new GrobalHooks.MouseHook();
-        static GrobalHooks.KeyboardHook keyboardHook = new GrobalHooks.KeyboardHook();
+        static GlobalHooks.MouseHook mouseHook = new GlobalHooks.MouseHook();
+        static GlobalHooks.KeyboardHook keyboardHook = new GlobalHooks.KeyboardHook();
 
         #region public
 
         public static void InitializeHooks()
         {
             // register events
-            //mouseHook.MouseMove += new GrobalHooks.MouseHook.MouseHookCallback(MouseHook_MouseMove);
-            mouseHook.LeftButtonDown += new GrobalHooks.MouseHook.MouseHookCallback(MouseHook_LeftButtonDown);
-            //mouseHook.LeftButtonUp += new GrobalHooks.MouseHook.MouseHookCallback(MouseHook_LeftButtonUp);
-            mouseHook.RightButtonDown += new GrobalHooks.MouseHook.MouseHookCallback(MouseHook_RightButtonDown);
-            //mouseHook.RightButtonUp += new GrobalHooks.MouseHook.MouseHookCallback(MouseHook_RightButtonUp);
-            mouseHook.MiddleButtonDown += new GrobalHooks.MouseHook.MouseHookCallback(MouseHook_MiddleButtonDown);
-            //mouseHook.MiddleButtonUp += new GrobalHooks.MouseHook.MouseHookCallback(MouseHook_MiddleButtonUp);
-            mouseHook.MouseWheel += new GrobalHooks.MouseHook.MouseHookCallback(MouseHook_MouseWheel);
+            //mouseHook.MouseMove += new GlobalHooks.MouseHook.MouseHookCallback(MouseHook_MouseMove);
+            mouseHook.LeftButtonDown += new GlobalHooks.MouseHook.MouseHookCallback(MouseHook_LeftButtonDown);
+            //mouseHook.LeftButtonUp += new GlobalHooks.MouseHook.MouseHookCallback(MouseHook_LeftButtonUp);
+            mouseHook.RightButtonDown += new GlobalHooks.MouseHook.MouseHookCallback(MouseHook_RightButtonDown);
+            //mouseHook.RightButtonUp += new GlobalHooks.MouseHook.MouseHookCallback(MouseHook_RightButtonUp);
+            mouseHook.MiddleButtonDown += new GlobalHooks.MouseHook.MouseHookCallback(MouseHook_MiddleButtonDown);
+            //mouseHook.MiddleButtonUp += new GlobalHooks.MouseHook.MouseHookCallback(MouseHook_MiddleButtonUp);
+            mouseHook.MouseWheel += new GlobalHooks.MouseHook.MouseHookCallback(MouseHook_MouseWheel);
 
-            keyboardHook.KeyDown += new GrobalHooks.KeyboardHook.KeyboardHookCallback(KeyboardHook_KeyDown);
-            //keyboardHook.KeyUp += new GrobalHooks.KeyboardHook.KeyboardHookCallback(KeyboardHook_KeyUp);
+            keyboardHook.KeyDown += new GlobalHooks.KeyboardHook.KeyboardHookCallback(KeyboardHook_KeyDown);
+            //keyboardHook.KeyUp += new GlobalHooks.KeyboardHook.KeyboardHookCallback(KeyboardHook_KeyUp);
 
             //開始
             mouseHook.Install();
@@ -59,7 +59,7 @@ namespace OperationCapture.Core
 
         #region MouseHook_MouseWheel
 
-        async static void MouseHook_MouseWheel(GrobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
+        async static void MouseHook_MouseWheel(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
             await CallCoreMethod("Mouse Wheel Move");
         }
@@ -68,7 +68,7 @@ namespace OperationCapture.Core
 
         #region MouseHook_MiddleButtonDown
 
-        async static void MouseHook_MiddleButtonDown(GrobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
+        async static void MouseHook_MiddleButtonDown(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
             await CallCoreMethod("Mouse Middle Button Down");
         }
@@ -77,7 +77,7 @@ namespace OperationCapture.Core
 
         #region MouseHook_RightButtonDown
 
-        async static void MouseHook_RightButtonDown(GrobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
+        async static void MouseHook_RightButtonDown(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
             await CallCoreMethod("Mouse Right Button Down");
         }
@@ -86,7 +86,7 @@ namespace OperationCapture.Core
 
         #region MouseHook_LeftButtonDown
 
-        async static void MouseHook_LeftButtonDown(GrobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
+        async static void MouseHook_LeftButtonDown(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
             await CallCoreMethod("Mouse Left Button Down");
         }
@@ -95,16 +95,16 @@ namespace OperationCapture.Core
 
         #region KeyboardHook_KeyDown
 
-        async static void KeyboardHook_KeyDown(GrobalHooks.KeyboardHook.VKeys key)
+        async static void KeyboardHook_KeyDown(GlobalHooks.KeyboardHook.VKeys key)
         {
 
-            if (key == GrobalHooks.KeyboardHook.VKeys.ESCAPE)
+            if (key == GlobalHooks.KeyboardHook.VKeys.ESCAPE)
             {
                 System.Environment.Exit(0);
                 //this.ClosingProcess();
             }
             //鬱陶しいからEnter以外は無視しようと思います。
-            else if (key != GrobalHooks.KeyboardHook.VKeys.RETURN)
+            else if (key != GlobalHooks.KeyboardHook.VKeys.RETURN)
             {
                 //No Action
                 return;

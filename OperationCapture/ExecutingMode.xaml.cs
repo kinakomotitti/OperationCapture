@@ -33,7 +33,7 @@ namespace OperationCapture
 
         private void CaptureStartButton_Click(object sender, RoutedEventArgs e)
         {
-            GrobalHookManager.FinalizeHooks();
+            GlobalHookManager.FinalizeHooks();
             this.WindowWidth=defaultWindowWidth;
             this.WindowHeight=defaultWindowHeight;
             this.NavigationService.GoBack();
