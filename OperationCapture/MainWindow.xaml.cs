@@ -27,6 +27,16 @@ namespace OperationCapture
             DefaultMode nextPage = new DefaultMode();
             this.Navigate(nextPage);
         }
+
+
+
         #endregion
+
+        private void NavigationWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow(this);
+            window.Left = 0;
+            window.Top = 0;
+        }
     }
 }
