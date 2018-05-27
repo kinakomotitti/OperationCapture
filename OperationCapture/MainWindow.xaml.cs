@@ -26,10 +26,7 @@ namespace OperationCapture
             InitializeComponent();
             DefaultMode nextPage = new DefaultMode();
             this.Navigate(nextPage);
-           
         }
         #endregion
-
-        
     }
 }
