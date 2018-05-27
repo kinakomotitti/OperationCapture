@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:OperationCapture"
       mc:Ignorable="d" 
-      d:DesignHeight="100" d:DesignWidth="200"
+      d:DesignHeight="100" d:DesignWidth="250"
       Title="DefaultMode" Background="White" Loaded="Page_Loaded">
     <Page.Resources>
         <ResourceDictionary>
@@ -17,10 +17,13 @@
                          UriSource="./Resource/レトロなカメラのフリーイラスト1.png"/>
             <BitmapImage x:Key="ExitImage"
                          UriSource="./Resource/EXITのベクター素材1.png"/>
+            <BitmapImage x:Key="SettingImage"
+                         UriSource="./Resource/ギアアイコン.png"/>
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
@@ -45,6 +48,11 @@
                 Click="ExitApplicationButton_Click"  ToolTip="Exit"
                  BorderBrush="White" Background="white">
             <Image Source="{StaticResource ExitImage}"/>
+        </Button>
+        <Button x:Name="SettingButton" Grid.Column="4" 
+                Click="SettingButton_Click"
+                 BorderBrush="White" Background="white">
+            <Image Source="{StaticResource SettingImage}"/>
         </Button>
     </Grid>
 </Page>

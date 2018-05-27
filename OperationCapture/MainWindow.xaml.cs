@@ -28,8 +28,6 @@ namespace OperationCapture
             this.Navigate(nextPage);
         }
 
-
-
         #endregion
 
         private void NavigationWindow_Loaded(object sender, RoutedEventArgs e)

@@ -12,6 +12,6 @@
                   WindowStyle="None"
                   ResizeMode="NoResize" 
                   Foreground="White"
-                  BorderBrush="AliceBlue" Loaded="NavigationWindow_Loaded">
+                  BorderBrush="AliceBlue" Loaded="NavigationWindow_Loaded" >
 
 </NavigationWindow>

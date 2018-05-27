@@ -56,7 +56,15 @@ namespace OperationCapture
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            this.WindowWidth = 500;
+            this.WindowHeight = 110;
             this.SaveToExcelButton.IsEnabled= EventCore.Operations.Count > 0;
+        }
+
+        private void SettingButton_Click(object sender, RoutedEventArgs e)
+        {
+            var nextPage = new SettingMode();
+            this.NavigationService.Navigate(nextPage);
         }
 
         #endregion

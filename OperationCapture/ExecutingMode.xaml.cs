@@ -21,7 +21,7 @@ namespace OperationCapture
     /// </summary>
     public partial class ExecutingMode : Page
     {
-        private double defaultWindowWidth = 400;
+        private double defaultWindowWidth = 500;
         private double defaultWindowHeight=110;
         public ExecutingMode()
         {

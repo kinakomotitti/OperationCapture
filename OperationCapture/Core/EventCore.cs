@@ -22,7 +22,6 @@ namespace OperationCapture.Core
         #region 変数/定数
 
         private int ActiveCellRow = 1;
-        private long CellRow = 24;
         public static Dictionary<string, string> Operations = new Dictionary<string, string>();
 
         #endregion
@@ -36,9 +35,8 @@ namespace OperationCapture.Core
         /// </summary>
         public void SaveEvidenceToExcelFile()
         {
-            var render = new System.Configuration.AppSettingsReader();
-            var folderPath = render.GetValue("outputFolderPath", typeof(string)).ToString();
-            var fileName = render.GetValue("outputExcelFileName", typeof(string)).ToString();
+            var folderPath = SettingsManager.GetFolderPath();
+            var fileName = SettingsManager.GetFileName();
             string filePath = Path.Combine(folderPath, fileName);
             if (!File.Exists(filePath))
             {
@@ -72,7 +70,7 @@ namespace OperationCapture.Core
                                   .MoveTo(ws.Cell($"B{ActiveCellRow}")
                                             .Address)
                                   .Scale(0.7);
-                    ActiveCellRow += (int)(image.Height / CellRow) + 1;
+                    ActiveCellRow += (int)(image.Height / SettingsManager.LocalExcelCellHeight) + 1;
                     ws.Cell($"A{ActiveCellRow.ToString()}").Value = $"上記画像は、{item.Value} した結果です。";
                     ActiveCellRow++;
                 }
@@ -108,8 +106,8 @@ namespace OperationCapture.Core
         /// </summary>
         public string TakeScreenShot()
         {
-            var render = new System.Configuration.AppSettingsReader();
-            var dirPath = render.GetValue("outputFolderPath", typeof(string)).ToString();
+
+            var dirPath = SettingsManager.GetFolderPath();
             dirPath = Path.Combine(dirPath, "Screenshot");
             this.CreateDirectory(dirPath);
             string shotName = Path.Combine(dirPath, $"{DateTime.Now.ToString("yyyyMMdd_hhmmss.fffffff")}.jpeg");
