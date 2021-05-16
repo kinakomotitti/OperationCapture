@@ -12,7 +12,7 @@
         private static AppSettingsReader render = new AppSettingsReader();
         public static string LocalFolderPath { get; set; }
         public static string LocalFileName { get; set; }
-        public static long LocalExcelCellHeight { get; set; } = 24;
+        public static long LocalExcelCellHeight { get; set; } = 20; //default cell height
 
         #endregion
 
