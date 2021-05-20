@@ -8,6 +8,7 @@
     using System.Drawing.Imaging;
     using System.IO;
     using System.Runtime.InteropServices;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
     #endregion
 
@@ -62,7 +63,7 @@
                                   .MoveTo(ws.Cell($"B{ActiveCellRow}")
                                             .Address)
                                   .Scale(0.7);
-                    
+
                     ActiveCellRow += (int)(image.Height / SettingsManager.LocalExcelCellHeight) + 1;
                     LogManager.Logger.Error(ActiveCellRow);
                     LogManager.Logger.Error(image.Height);
@@ -106,7 +107,8 @@
             dirPath = Path.Combine(dirPath, "Screenshot");
             this.CreateDirectory(dirPath);
             string shotName = Path.Combine(dirPath, $"{DateTime.Now.ToString("yyyyMMdd_hhmmss.fffffff")}.jpeg");
-            this.CaptureScreen(true, shotName);
+            //this.CaptureScreen(true, shotName);
+            this.CaptureActiveWindow(true, shotName);
             return shotName;
         }
         public void TakeScreenShot(string operation)
@@ -184,6 +186,49 @@
                 result = null;
             }
         }
+
+        private void CaptureActiveWindow(bool CaptureMouse, string filePath)
+        {
+            Task.Delay(100).Wait();
+            //アクティブなウィンドウのデバイスコンテキストを取得
+            IntPtr hWnd = ActiveWindow.GetForegroundWindow();
+            IntPtr winDC = ActiveWindow.GetWindowDC(hWnd);
+
+            //ウィンドウの大きさを取得
+            ActiveWindow.RECT winRect = new ActiveWindow.RECT();
+            ActiveWindow.DwmGetWindowAttribute(
+                hWnd,
+                ActiveWindow.DWMWA_EXTENDED_FRAME_BOUNDS,
+                out var bounds,
+                Marshal.SizeOf(typeof(ActiveWindow.RECT)));
+            ActiveWindow.GetWindowRect(hWnd, ref winRect);
+
+            //Bitmapの作成
+            var offsetX = bounds.left - winRect.left;
+            var offsetY = bounds.top - winRect.top;
+            Bitmap bmp = new Bitmap(bounds.right - bounds.left,
+                bounds.bottom - bounds.top);
+
+            //Graphicsの作成
+            Graphics g = Graphics.FromImage(bmp);
+
+            //Graphicsのデバイスコンテキストを取得
+            IntPtr hDC = g.GetHdc();
+
+            //Bitmapに画像をコピーする
+            int bmpWidth = bmp.Width;
+            int bmpHeight = bmp.Height;
+            Console.WriteLine(winRect);
+            ActiveWindow.BitBlt(hDC, 0, 0, bmpWidth, bmpHeight,
+                winDC, offsetX, offsetY, ActiveWindow.SRCCOPY);
+
+            //解放
+            g.ReleaseHdc(hDC);
+            g.Dispose();
+            ActiveWindow.ReleaseDC(hWnd, winDC);
+            bmp.Save(filePath);
+        }
+
         #endregion
 
         private void CreateIndexImage(IXLWorksheet ws)
