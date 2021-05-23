@@ -14,24 +14,18 @@
 
     public class EventCore
     {
-        #region 変数/定数
-
         private int ActiveCellRow = 1;
         public static Dictionary<string, string> Operations = new Dictionary<string, string>();
-
-        #endregion
-
+        
         #region public
-
-        #region SaveEvidenceToExcelFile :　エクセルに画像データを保存
 
         /// <summary>
         /// ClosedXMLを利用してExcelに画像を貼り付けて保存
         /// </summary>
         public void SaveEvidenceToExcelFile()
         {
-            var folderPath = SettingsManager.GetFolderPath();
-            var fileName = SettingsManager.GetFileName();
+            var folderPath = SettingsManager.LocalFolderPath;
+            var fileName = SettingsManager.LocalFileName;
             string filePath = Path.Combine(folderPath, fileName);
             if (!File.Exists(filePath))
             {
@@ -46,7 +40,6 @@
                 }
                 catch (Exception ex)
                 {
-                    LogManager.Logger.Error("EXCELファイルの生成に失敗しました。");
                     LogManager.Logger.Error(ex.GetBaseException().Message);
                     return;
                 }
@@ -81,10 +74,6 @@
             }
         }
 
-        #endregion
-
-        #region CreateDirectory : ファイル格納フォルダ作成
-
         public void CreateDirectory(string dirPath)
         {
             if (Directory.Exists(dirPath) == false)
@@ -93,22 +82,18 @@
             }
         }
 
-        #endregion
-
-        #region TakeScreenShot   :   スクリーンショットの取得
-
         /// <summary>
         /// StackOverFlowのAnswerからコア部分のロジックを拝借しています
         /// </summary>
         public string TakeScreenShot()
         {
 
-            var dirPath = SettingsManager.GetFolderPath();
+            var dirPath = SettingsManager.LocalFolderPath;
             dirPath = Path.Combine(dirPath, "Screenshot");
             this.CreateDirectory(dirPath);
             string shotName = Path.Combine(dirPath, $"{DateTime.Now.ToString("yyyyMMdd_hhmmss.fffffff")}.jpeg");
-            //this.CaptureScreen(true, shotName);
-            this.CaptureActiveWindow(true, shotName);
+            if (SettingsManager.UseActiveWindowOnly) this.CaptureActiveWindow(true, shotName);
+            else  this.CaptureScreen(true, shotName);
             return shotName;
         }
         public void TakeScreenShot(string operation)
@@ -116,20 +101,14 @@
             var shotName = this.TakeScreenShot();
             if (EventCore.Operations.ContainsKey(shotName))
             {
-                LogManager.Logger.Info($"{shotName}の保存に失敗しました。");
+                LogManager.Logger.Info($"Failed to save screenshot. {shotName}");
             }
             EventCore.Operations.Add(shotName, operation);
         }
-
-        #endregion
-
         #endregion
 
         #region private
 
-        #region スクリーンショット
-        //https://stackoverflow.com/questions/6750056/how-to-capture-the-screen-and-mouse-pointer-using-windows-apis
-        //より拝借（一部修正）
         [StructLayout(LayoutKind.Sequential)]
         struct CURSORINFO
         {
@@ -228,8 +207,6 @@
             ActiveWindow.ReleaseDC(hWnd, winDC);
             bmp.Save(filePath);
         }
-
-        #endregion
 
         private void CreateIndexImage(IXLWorksheet ws)
         {

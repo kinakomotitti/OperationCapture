@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:OperationCapture"
       mc:Ignorable="d" 
-      d:DesignHeight="100" d:DesignWidth="250"
+      d:DesignHeight="50" d:DesignWidth="250"
       Title="DefaultMode" Background="White" Loaded="Page_Loaded">
     <Page.Resources>
         <ResourceDictionary>
@@ -13,8 +13,6 @@
                          UriSource="./Resource/再生ボタン.png"/>
             <BitmapImage x:Key="SaveImage"
                          UriSource="./Resource/フロッピーディスクアイコン3.png"/>
-            <BitmapImage x:Key="CaptureImage"
-                         UriSource="./Resource/レトロなカメラのフリーイラスト1.png"/>
             <BitmapImage x:Key="ExitImage"
                          UriSource="./Resource/EXITのベクター素材1.png"/>
             <BitmapImage x:Key="SettingImage"
@@ -38,11 +36,6 @@
                 Click="SaveToExcelButton_Click"  ToolTip="Save to Excel"
                  BorderBrush="White" Background="white">
             <Image Source="{StaticResource SaveImage}"/>
-        </Button>
-        <Button x:Name="PrintScreenButton" Grid.Column="2" 
-                Click="PrintScreenButton_Click"  ToolTip="Take a Screenshot"
-                 BorderBrush="White" Background="white">
-            <Image Source="{StaticResource CaptureImage}"/>
         </Button>
         <Button x:Name="ExitApplicationButton" Grid.Column="3" 
                 Click="ExitApplicationButton_Click"  ToolTip="Exit"

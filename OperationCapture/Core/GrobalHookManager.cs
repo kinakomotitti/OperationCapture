@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OperationCapture.Core
+﻿namespace OperationCapture.Core
 {
+    #region using
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    #endregion
+
     public class GlobalHookManager
     {
-        /// <summary>
-        /// Class declarations
-        /// </summary>
         static GlobalHooks.MouseHook mouseHook = new GlobalHooks.MouseHook();
         static GlobalHooks.KeyboardHook keyboardHook = new GlobalHooks.KeyboardHook();
 
@@ -45,7 +44,7 @@ namespace OperationCapture.Core
 
         #endregion
 
-        #region CallCoreMethod
+        #region private
 
         private static void CallCoreMethod(string operation)
         {
@@ -60,43 +59,25 @@ namespace OperationCapture.Core
 
         #region Event
 
-        #region MouseHook_MouseWheel
-
         static void MouseHook_MouseWheel(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
             CallCoreMethod("Mouse Wheel Move");
         }
-
-        #endregion
-
-        #region MouseHook_MiddleButtonDown
 
         static void MouseHook_MiddleButtonDown(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
             CallCoreMethod("Mouse Middle Button Down");
         }
 
-        #endregion
-
-        #region MouseHook_RightButtonDown
-
         static void MouseHook_RightButtonDown(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
             CallCoreMethod("Mouse Right Button Down");
         }
 
-        #endregion
-
-        #region MouseHook_LeftButtonDown
-
         static void MouseHook_LeftButtonDown(GlobalHooks.MouseHook.MSLLHOOKSTRUCT mouseStruct)
         {
             CallCoreMethod("Mouse Left Button Down");
         }
-
-        #endregion
-
-        #region KeyboardHook_KeyDown
 
         static void KeyboardHook_KeyDown(GlobalHooks.KeyboardHook.VKeys key)
         {
@@ -115,10 +96,6 @@ namespace OperationCapture.Core
             CallCoreMethod(key.ToString());
         }
 
-        #endregion
-
-        #region Window_Closing:Window閉じるイベント
-
         private static void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //Hookの撤収
@@ -127,9 +104,5 @@ namespace OperationCapture.Core
         }
 
         #endregion
-
-        #endregion
-
-
     }
 }
