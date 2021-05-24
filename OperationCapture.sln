@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationCapture", "OperationCapture\OperationCapture.csproj", "{66577CFB-55F8-4E35-B2D3-7A85E6AE8A3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationCapture", "src\OperationCapture\OperationCapture.csproj", "{66577CFB-55F8-4E35-B2D3-7A85E6AE8A3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
