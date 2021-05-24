@@ -59,7 +59,7 @@
             SettingsManager.LocalFileName = string.IsNullOrWhiteSpace(this.FileName_TextBox.Text)==false ?
                                                 this.FileName_TextBox.Text :
                                                 SettingsManager.LocalFileName;
-            SettingsManager.UseActiveWindowOnly = this.UseActiveWindow_Checbox.IsEnabled;
+            SettingsManager.UseActiveWindowOnly = (bool)this.UseActiveWindow_Checbox.IsChecked ;
 
             int heiht = 0;
             if (int.TryParse(this.ExcelCellHeight_TextBox.Text,out heiht))

@@ -16,7 +16,7 @@
     {
         private int ActiveCellRow = 1;
         public static Dictionary<string, string> Operations = new Dictionary<string, string>();
-        
+
         #region public
 
         /// <summary>
@@ -93,7 +93,7 @@
             this.CreateDirectory(dirPath);
             string shotName = Path.Combine(dirPath, $"{DateTime.Now.ToString("yyyyMMdd_hhmmss.fffffff")}.jpeg");
             if (SettingsManager.UseActiveWindowOnly) this.CaptureActiveWindow(true, shotName);
-            else  this.CaptureScreen(true, shotName);
+            else this.CaptureScreen(true, shotName);
             return shotName;
         }
         public void TakeScreenShot(string operation)
@@ -160,52 +160,59 @@
                 }
                 result?.Save(filePath);
             }
-            catch
+            catch (Exception ex)
             {
-                result = null;
+                LogManager.Logger.Info(ex.ToString());
             }
         }
 
         private void CaptureActiveWindow(bool CaptureMouse, string filePath)
         {
             Task.Delay(100).Wait();
-            //アクティブなウィンドウのデバイスコンテキストを取得
-            IntPtr hWnd = ActiveWindow.GetForegroundWindow();
-            IntPtr winDC = ActiveWindow.GetWindowDC(hWnd);
 
-            //ウィンドウの大きさを取得
-            ActiveWindow.RECT winRect = new ActiveWindow.RECT();
-            ActiveWindow.DwmGetWindowAttribute(
-                hWnd,
-                ActiveWindow.DWMWA_EXTENDED_FRAME_BOUNDS,
-                out var bounds,
-                Marshal.SizeOf(typeof(ActiveWindow.RECT)));
-            ActiveWindow.GetWindowRect(hWnd, ref winRect);
+            try
+            {
+                //アクティブなウィンドウのデバイスコンテキストを取得
+                IntPtr hWnd = ActiveWindow.GetForegroundWindow();
+                IntPtr winDC = ActiveWindow.GetWindowDC(hWnd);
 
-            //Bitmapの作成
-            var offsetX = bounds.left - winRect.left;
-            var offsetY = bounds.top - winRect.top;
-            Bitmap bmp = new Bitmap(bounds.right - bounds.left,
-                bounds.bottom - bounds.top);
+                //ウィンドウの大きさを取得
+                ActiveWindow.RECT winRect = new ActiveWindow.RECT();
+                ActiveWindow.DwmGetWindowAttribute(
+                    hWnd,
+                    ActiveWindow.DWMWA_EXTENDED_FRAME_BOUNDS,
+                    out var bounds,
+                    Marshal.SizeOf(typeof(ActiveWindow.RECT)));
+                ActiveWindow.GetWindowRect(hWnd, ref winRect);
 
-            //Graphicsの作成
-            Graphics g = Graphics.FromImage(bmp);
+                Bitmap result = new Bitmap(bounds.right - bounds.left, bounds.bottom - bounds.top, PixelFormat.Format24bppRgb);
 
-            //Graphicsのデバイスコンテキストを取得
-            IntPtr hDC = g.GetHdc();
 
-            //Bitmapに画像をコピーする
-            int bmpWidth = bmp.Width;
-            int bmpHeight = bmp.Height;
-            Console.WriteLine(winRect);
-            ActiveWindow.BitBlt(hDC, 0, 0, bmpWidth, bmpHeight,
-                winDC, offsetX, offsetY, ActiveWindow.SRCCOPY);
+                using (Graphics g = Graphics.FromImage(result))
+                {
+                    g.CopyFromScreen(bounds.left, bounds.top, 0, 0, Screen.PrimaryScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
 
-            //解放
-            g.ReleaseHdc(hDC);
-            g.Dispose();
-            ActiveWindow.ReleaseDC(hWnd, winDC);
-            bmp.Save(filePath);
+                    if (CaptureMouse)
+                    {
+                        CURSORINFO pci;
+                        pci.cbSize = System.Runtime.InteropServices.Marshal.SizeOf(typeof(CURSORINFO));
+
+                        if (GetCursorInfo(out pci))
+                        {
+                            if (pci.flags == CURSOR_SHOWING)
+                            {
+                                DrawIcon(g.GetHdc(), pci.ptScreenPos.x, pci.ptScreenPos.y, pci.hCursor);
+                                g.ReleaseHdc();
+                            }
+                        }
+                    }
+                }
+                result?.Save(filePath);
+            }
+            catch (Exception ex)
+            {
+                LogManager.Logger.Info(ex.ToString());
+            }
         }
 
         private void CreateIndexImage(IXLWorksheet ws)

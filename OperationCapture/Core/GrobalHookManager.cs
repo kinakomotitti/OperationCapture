@@ -25,7 +25,7 @@
             //mouseHook.RightButtonUp += new GlobalHooks.MouseHook.MouseHookCallback(MouseHook_RightButtonUp);
             mouseHook.MiddleButtonDown += new GlobalHooks.MouseHook.MouseHookCallback(MouseHook_MiddleButtonDown);
             //mouseHook.MiddleButtonUp += new GlobalHooks.MouseHook.MouseHookCallback(MouseHook_MiddleButtonUp);
-            mouseHook.MouseWheel += new GlobalHooks.MouseHook.MouseHookCallback(MouseHook_MouseWheel);
+            //mouseHook.MouseWheel += new GlobalHooks.MouseHook.MouseHookCallback(MouseHook_MouseWheel);
 
             keyboardHook.KeyDown += new GlobalHooks.KeyboardHook.KeyboardHookCallback(KeyboardHook_KeyDown);
             //keyboardHook.KeyUp += new GlobalHooks.KeyboardHook.KeyboardHookCallback(KeyboardHook_KeyUp);
