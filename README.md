@@ -1,0 +1,2 @@
+# OperationCapture
+UI操作のキャプチャーをとってExcelにまとめるためのツール
