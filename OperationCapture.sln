@@ -5,6 +5,12 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OperationCapture", "src\OperationCapture\OperationCapture.csproj", "{66577CFB-55F8-4E35-B2D3-7A85E6AE8A3B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{48B46603-9431-446A-B85D-1DBCE36C10AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{94FA542F-359F-4D6A-B67B-B9B22420BDBD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject", "test\XUnitTestProject\XUnitTestProject.csproj", "{7897E923-A30E-4653-B6F7-3CE0BE7E3AB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +21,17 @@ Global
 		{66577CFB-55F8-4E35-B2D3-7A85E6AE8A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66577CFB-55F8-4E35-B2D3-7A85E6AE8A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66577CFB-55F8-4E35-B2D3-7A85E6AE8A3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7897E923-A30E-4653-B6F7-3CE0BE7E3AB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7897E923-A30E-4653-B6F7-3CE0BE7E3AB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7897E923-A30E-4653-B6F7-3CE0BE7E3AB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7897E923-A30E-4653-B6F7-3CE0BE7E3AB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{66577CFB-55F8-4E35-B2D3-7A85E6AE8A3B} = {48B46603-9431-446A-B85D-1DBCE36C10AD}
+		{7897E923-A30E-4653-B6F7-3CE0BE7E3AB6} = {94FA542F-359F-4D6A-B67B-B9B22420BDBD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77609379-B4A9-405A-86F4-953571CD5CE9}

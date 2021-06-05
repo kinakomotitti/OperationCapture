@@ -1,5 +1,6 @@
 ﻿namespace OperationCapture.Core
 {
+    using AnimatedGif;
     #region using
     using ClosedXML.Excel;
     using System;
@@ -70,6 +71,15 @@
                 catch (Exception ex)
                 {
                     LogManager.Logger.Error(ex.GetBaseException().Message);
+                }
+            }
+
+            using (var gif = AnimatedGif.Create(Path.Combine(folderPath, "mygif.gif"), 1000))
+            {
+                foreach (var item in Operations)
+                {
+                    var img = Image.FromFile(item.Key);
+                    gif.AddFrame(img, delay: -1, quality: GifQuality.Bit8);
                 }
             }
         }
