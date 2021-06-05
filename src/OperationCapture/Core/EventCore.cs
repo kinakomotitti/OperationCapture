@@ -1,7 +1,7 @@
 ﻿namespace OperationCapture.Core
 {
-    using AnimatedGif;
     #region using
+    using AnimatedGif;
     using ClosedXML.Excel;
     using System;
     using System.Collections.Generic;
@@ -16,14 +16,32 @@
     public class EventCore
     {
         private int ActiveCellRow = 1;
+
         public static Dictionary<string, string> Operations = new Dictionary<string, string>();
 
         #region public
 
-        /// <summary>
-        /// ClosedXMLを利用してExcelに画像を貼り付けて保存
-        /// </summary>
-        public void SaveEvidenceToExcelFile()
+        public void SaveEvidence()
+        {
+            this.SaveToExcelFile();
+            this.SaveToGifFile();
+        }
+
+        public void TakeScreenShot(string operation)
+        {
+            var shotName = this.TakeScreenShot();
+            if (EventCore.Operations.ContainsKey(shotName))
+            {
+                LogManager.Logger.Info($"Failed to save screenshot. {shotName}");
+            }
+            EventCore.Operations.Add(shotName, operation);
+        }
+
+        #endregion
+
+        #region private
+
+        private void SaveToExcelFile()
         {
             var folderPath = SettingsManager.LocalFolderPath;
             var fileName = SettingsManager.LocalFileName;
@@ -73,8 +91,11 @@
                     LogManager.Logger.Error(ex.GetBaseException().Message);
                 }
             }
+        }
 
-            using (var gif = AnimatedGif.Create(Path.Combine(folderPath, "mygif.gif"), 1000))
+        private void SaveToGifFile()
+        {
+            using (var gif = AnimatedGif.Create(Path.Combine(SettingsManager.LocalFolderPath, $"{DateTime.Now.ToString("yyyyMMdd_hhmmss.fffffff")}.gif"), 1000))
             {
                 foreach (var item in Operations)
                 {
@@ -92,12 +113,8 @@
             }
         }
 
-        /// <summary>
-        /// StackOverFlowのAnswerからコア部分のロジックを拝借しています
-        /// </summary>
-        public string TakeScreenShot()
+        private string TakeScreenShot()
         {
-
             var dirPath = SettingsManager.LocalFolderPath;
             dirPath = Path.Combine(dirPath, "Screenshot");
             this.CreateDirectory(dirPath);
@@ -106,18 +123,6 @@
             else this.CaptureScreen(true, shotName);
             return shotName;
         }
-        public void TakeScreenShot(string operation)
-        {
-            var shotName = this.TakeScreenShot();
-            if (EventCore.Operations.ContainsKey(shotName))
-            {
-                LogManager.Logger.Info($"Failed to save screenshot. {shotName}");
-            }
-            EventCore.Operations.Add(shotName, operation);
-        }
-        #endregion
-
-        #region private
 
         [StructLayout(LayoutKind.Sequential)]
         struct CURSORINFO

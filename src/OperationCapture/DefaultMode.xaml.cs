@@ -30,13 +30,7 @@
         {
             this.SaveToExcelButton.IsEnabled = false;
             EventCore core = new EventCore();
-            core.SaveEvidenceToExcelFile();
-        }
-
-        private void PrintScreenButton_Click(object sender, RoutedEventArgs e)
-        {
-            EventCore core = new EventCore();
-            core.TakeScreenShot();
+            core.SaveEvidence();
         }
 
         private void ExitApplicationButton_Click(object sender, RoutedEventArgs e)
